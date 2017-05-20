@@ -1,6 +1,10 @@
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import panamahitek.Arduino.PanamaHitek_Arduino;
 
 /*
@@ -20,6 +24,13 @@ public class Interfaz extends javax.swing.JFrame {
      */
     public Interfaz() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        this.setResizable(false);
+        Dimension dim = panelPrincipal.getSize();
+        this.setSize(dim);
+        panelPrincipal.setBackground(Color.yellow);
+        this.setTitle("PetFood");   
+        cImagen(logo);
         try {
             arduino.arduinoTX("COM3", 9600);
         } catch (Exception ex) {
@@ -36,78 +47,183 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelPrincipal = new javax.swing.JPanel();
         btnEncender1 = new javax.swing.JButton();
         btnEncender2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtTiempo = new javax.swing.JTextField();
         btnTiempo = new javax.swing.JButton();
+        logo = new javax.swing.JLabel();
+        giroIzq1 = new javax.swing.JButton();
+        giroDer1 = new javax.swing.JButton();
+        giroIzq2 = new javax.swing.JButton();
+        giroDer2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        btnEncender1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnEncender1.setForeground(new java.awt.Color(255, 0, 0));
         btnEncender1.setText("Encender motor 1");
+        btnEncender1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnEncender1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEncender1ActionPerformed(evt);
             }
         });
 
+        btnEncender2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnEncender2.setForeground(new java.awt.Color(255, 0, 0));
         btnEncender2.setText("Encender motor 2");
+        btnEncender2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnEncender2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEncender2ActionPerformed(evt);
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 255));
         jLabel1.setText("Tiempo para la comida");
+        jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        txtTiempo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        txtTiempo.setForeground(new java.awt.Color(51, 0, 255));
+        txtTiempo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtTiempo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        btnTiempo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnTiempo.setForeground(new java.awt.Color(255, 0, 0));
         btnTiempo.setText("Asignar Tiempo");
+        btnTiempo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnTiempo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTiempoActionPerformed(evt);
             }
         });
 
+        logo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        giroIzq1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        giroIzq1.setForeground(new java.awt.Color(255, 0, 0));
+        giroIzq1.setText("Izq");
+        giroIzq1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        giroIzq1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                giroIzq1ActionPerformed(evt);
+            }
+        });
+
+        giroDer1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        giroDer1.setForeground(new java.awt.Color(255, 0, 0));
+        giroDer1.setText("Der");
+        giroDer1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        giroDer1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                giroDer1ActionPerformed(evt);
+            }
+        });
+
+        giroIzq2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        giroIzq2.setForeground(new java.awt.Color(255, 0, 0));
+        giroIzq2.setText("Izq");
+        giroIzq2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        giroIzq2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                giroIzq2ActionPerformed(evt);
+            }
+        });
+
+        giroDer2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        giroDer2.setForeground(new java.awt.Color(255, 0, 0));
+        giroDer2.setText("Der");
+        giroDer2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        giroDer2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                giroDer2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
+        panelPrincipal.setLayout(panelPrincipalLayout);
+        panelPrincipalLayout.setHorizontalGroup(
+            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPrincipalLayout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(txtTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(172, 172, 172))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addComponent(btnEncender2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(giroIzq2, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addComponent(btnEncender1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(giroIzq1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(giroDer2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(giroDer1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45))
+        );
+        panelPrincipalLayout.setVerticalGroup(
+            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPrincipalLayout.createSequentialGroup()
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnEncender1, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                            .addComponent(giroIzq1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(giroDer1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(25, 25, 25)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnEncender2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(giroIzq2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(giroDer2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnEncender2)
-                            .addComponent(btnEncender1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(115, 115, 115))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(btnTiempo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(btnEncender1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEncender2)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnTiempo)
-                .addContainerGap(137, Short.MAX_VALUE))
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void cImagen(JLabel label){
+        ImageIcon icono = new ImageIcon("src/Imagenes/logo.png");
+        label.setIcon(icono); 
+    }
     private void btnEncender1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncender1ActionPerformed
         try {
             // TODO add your handling code here:
@@ -128,12 +244,49 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void btnTiempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTiempoActionPerformed
         try {
-            // TODO add your handling code here:
-            arduino.sendData(txtTiempo.getText());
+            if (Integer.parseInt(txtTiempo.getText())>0 && !txtTiempo.getText().equals("")) {
+                arduino.sendData(txtTiempo.getText());
+            }
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnTiempoActionPerformed
+
+    private void giroIzq1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_giroIzq1ActionPerformed
+        // TODO add your handling code here:
+        try {
+            arduino.sendData("i");
+        } catch (Exception ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_giroIzq1ActionPerformed
+
+    private void giroDer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_giroDer1ActionPerformed
+        // TODO add your handling code here:
+        try {
+            arduino.sendData("d");
+        } catch (Exception ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_giroDer1ActionPerformed
+
+    private void giroIzq2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_giroIzq2ActionPerformed
+        // TODO add your handling code here:
+        try {
+            arduino.sendData("I");
+        } catch (Exception ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_giroIzq2ActionPerformed
+
+    private void giroDer2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_giroDer2ActionPerformed
+        // TODO add your handling code here:
+        try {
+            arduino.sendData("D");
+        } catch (Exception ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_giroDer2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,7 +327,13 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton btnEncender1;
     private javax.swing.JButton btnEncender2;
     private javax.swing.JButton btnTiempo;
+    private javax.swing.JButton giroDer1;
+    private javax.swing.JButton giroDer2;
+    private javax.swing.JButton giroIzq1;
+    private javax.swing.JButton giroIzq2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel logo;
+    private javax.swing.JPanel panelPrincipal;
     private javax.swing.JTextField txtTiempo;
     // End of variables declaration//GEN-END:variables
 }
