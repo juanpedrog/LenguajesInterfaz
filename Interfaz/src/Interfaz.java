@@ -19,11 +19,13 @@ import panamahitek.Arduino.PanamaHitek_Arduino;
  */
 public class Interfaz extends javax.swing.JFrame {
     PanamaHitek_Arduino arduino=new PanamaHitek_Arduino();
+    boolean bi,bd, bI, bD, b1, b2;
     /**
      * Creates new form Interfaz
      */
     public Interfaz() {
         initComponents();
+        bi=bd=bI=bD=b1=b2=false;
         this.setLocationRelativeTo(this);
         txtTiempo.setText("Segundos");
         txtTiempo.setForeground(Color.LIGHT_GRAY);
@@ -34,7 +36,7 @@ public class Interfaz extends javax.swing.JFrame {
         this.setTitle("PetFood");   
         cImagen(logo);
         try {
-            arduino.arduinoTX("COM3", 9600);
+            arduino.arduinoTX("COM4", 9600);
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -60,11 +62,12 @@ public class Interfaz extends javax.swing.JFrame {
         giroDer1 = new javax.swing.JButton();
         giroIzq2 = new javax.swing.JButton();
         giroDer2 = new javax.swing.JButton();
+        salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        btnEncender1.setBackground(new java.awt.Color(249, 66, 15));
         btnEncender1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnEncender1.setForeground(new java.awt.Color(255, 0, 0));
         btnEncender1.setText("Encender motor 1");
         btnEncender1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnEncender1.addActionListener(new java.awt.event.ActionListener() {
@@ -73,8 +76,8 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        btnEncender2.setBackground(new java.awt.Color(249, 66, 15));
         btnEncender2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnEncender2.setForeground(new java.awt.Color(255, 0, 0));
         btnEncender2.setText("Encender motor 2");
         btnEncender2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnEncender2.addActionListener(new java.awt.event.ActionListener() {
@@ -102,7 +105,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
 
         btnTiempo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnTiempo.setForeground(new java.awt.Color(255, 0, 0));
+        btnTiempo.setForeground(new java.awt.Color(51, 51, 255));
         btnTiempo.setText("Asignar Tiempo");
         btnTiempo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnTiempo.addActionListener(new java.awt.event.ActionListener() {
@@ -113,8 +116,8 @@ public class Interfaz extends javax.swing.JFrame {
 
         logo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        giroIzq1.setBackground(new java.awt.Color(249, 66, 15));
         giroIzq1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        giroIzq1.setForeground(new java.awt.Color(255, 0, 0));
         giroIzq1.setText("Izq");
         giroIzq1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         giroIzq1.addActionListener(new java.awt.event.ActionListener() {
@@ -123,8 +126,8 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        giroDer1.setBackground(new java.awt.Color(249, 66, 15));
         giroDer1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        giroDer1.setForeground(new java.awt.Color(255, 0, 0));
         giroDer1.setText("Der");
         giroDer1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         giroDer1.addActionListener(new java.awt.event.ActionListener() {
@@ -133,8 +136,8 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        giroIzq2.setBackground(new java.awt.Color(249, 66, 15));
         giroIzq2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        giroIzq2.setForeground(new java.awt.Color(255, 0, 0));
         giroIzq2.setText("Izq");
         giroIzq2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         giroIzq2.addActionListener(new java.awt.event.ActionListener() {
@@ -143,13 +146,28 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        giroDer2.setBackground(new java.awt.Color(249, 66, 15));
         giroDer2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        giroDer2.setForeground(new java.awt.Color(255, 0, 0));
         giroDer2.setText("Der");
         giroDer2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         giroDer2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 giroDer2ActionPerformed(evt);
+            }
+        });
+
+        salir.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        salir.setForeground(new java.awt.Color(255, 0, 0));
+        salir.setText("Salir");
+        salir.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        salir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                salirMousePressed(evt);
+            }
+        });
+        salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirActionPerformed(evt);
             }
         });
 
@@ -164,26 +182,29 @@ public class Interfaz extends javax.swing.JFrame {
                 .addComponent(txtTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(172, 172, 172))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addComponent(btnEncender2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(giroIzq2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81)
+                        .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addComponent(btnEncender1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(giroIzq1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(giroDer1, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                    .addComponent(giroDer2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(panelPrincipalLayout.createSequentialGroup()
+                                .addComponent(btnEncender2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(giroIzq2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(panelPrincipalLayout.createSequentialGroup()
+                                .addComponent(btnEncender1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(giroIzq1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(giroDer1, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                            .addComponent(giroDer2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(27, 27, 27))
         );
         panelPrincipalLayout.setVerticalGroup(
@@ -210,7 +231,9 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(salir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
@@ -248,6 +271,17 @@ public class Interfaz extends javax.swing.JFrame {
     }
     private void btnEncender1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncender1ActionPerformed
         try {
+            if (!b1) {
+                btnEncender1.setBackground(Color.green);
+                b1=true;
+            }else{
+                btnEncender1.setBackground(new Color(249,66,15));
+                giroIzq1.setBackground(new Color(249,66,15));
+                giroDer1.setBackground(new Color(249,66,15));
+                b1=false;
+                bi=false;
+                bd=false;
+            }
             arduino.sendData("1");
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
@@ -255,7 +289,18 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEncender1ActionPerformed
 
     private void btnEncender2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncender2ActionPerformed
-        try {
+        try {            
+            if (!b2) {
+                btnEncender2.setBackground(Color.green);
+                b2=true;
+            }else{
+                btnEncender2.setBackground(new Color(249,66,15));
+                giroIzq2.setBackground(new Color(249,66,15));
+                giroDer2.setBackground(new Color(249,66,15));
+                b2=false;
+                bI=false;
+                bD=false;
+            }
             arduino.sendData("2");
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
@@ -278,6 +323,15 @@ public class Interfaz extends javax.swing.JFrame {
     private void giroIzq1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_giroIzq1ActionPerformed
         // TODO add your handling code here:
         try {
+            if (!bi && b1) {
+                giroIzq1.setBackground(Color.green);
+                giroDer1.setBackground(new Color(249,66,15));
+                bd=false;
+                bi=true;
+            }else{
+                giroIzq1.setBackground(new Color(249,66,15));
+                bi=false;
+            }
             arduino.sendData("i");
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
@@ -287,6 +341,15 @@ public class Interfaz extends javax.swing.JFrame {
     private void giroDer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_giroDer1ActionPerformed
         // TODO add your handling code here:
         try {
+            if (!bd && b1) {
+                giroDer1.setBackground(Color.green);
+                giroIzq1.setBackground(new Color(249,66,15));
+                bi=false;
+                bd=true;
+            }else{
+                giroDer1.setBackground(new Color(249,66,15));
+                bd=false;
+            }
             arduino.sendData("d");
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
@@ -296,6 +359,15 @@ public class Interfaz extends javax.swing.JFrame {
     private void giroIzq2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_giroIzq2ActionPerformed
         // TODO add your handling code here:
         try {
+            if (!bI && b2) {
+                giroIzq2.setBackground(Color.green);
+                giroDer2.setBackground(new Color(249,66,15));
+                bD=false;
+                bI=true;
+            }else{
+                giroIzq2.setBackground(new Color(249,66,15));
+                bI=false;
+            }
             arduino.sendData("I");
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
@@ -305,6 +377,15 @@ public class Interfaz extends javax.swing.JFrame {
     private void giroDer2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_giroDer2ActionPerformed
         // TODO add your handling code here:
         try {
+            if (!bD && b2) {
+                giroDer2.setBackground(Color.green);
+                giroIzq2.setBackground(new Color(249,66,15));
+                bI=false;
+                bD=true;
+            }else{
+                giroDer2.setBackground(new Color(249,66,15));
+                bD=false;
+            }
             arduino.sendData("D");
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
@@ -326,6 +407,27 @@ public class Interfaz extends javax.swing.JFrame {
             txtTiempo.setForeground(Color.LIGHT_GRAY);
         }
     }//GEN-LAST:event_txtTiempoFocusLost
+
+    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_salirActionPerformed
+
+    private void salirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirMousePressed
+        // TODO add your handling code here:
+        try {
+            arduino.sendData("s");
+            giroIzq2.setBackground(new Color(249,66,15));
+            giroIzq1.setBackground(new Color(249,66,15));
+            giroDer2.setBackground(new Color(249,66,15));
+            giroDer1.setBackground(new Color(249,66,15));
+            btnEncender1.setBackground(new Color(249,66,15));
+            btnEncender2.setBackground(new Color(249,66,15));
+            b1=b2=bi=bd=bI=bD=false;
+        } catch (Exception ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_salirMousePressed
 
     /**
      * @param args the command line arguments
@@ -373,6 +475,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel logo;
     private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JButton salir;
     private javax.swing.JTextField txtTiempo;
     // End of variables declaration//GEN-END:variables
 }
