@@ -25,6 +25,8 @@ public class Interfaz extends javax.swing.JFrame {
     public Interfaz() {
         initComponents();
         this.setLocationRelativeTo(this);
+        txtTiempo.setText("Segundos");
+        txtTiempo.setForeground(Color.LIGHT_GRAY);
         this.setResizable(false);
         Dimension dim = panelPrincipal.getSize();
         this.setSize(dim);
@@ -90,6 +92,14 @@ public class Interfaz extends javax.swing.JFrame {
         txtTiempo.setForeground(new java.awt.Color(51, 0, 255));
         txtTiempo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtTiempo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtTiempo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtTiempoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTiempoFocusLost(evt);
+            }
+        });
 
         btnTiempo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnTiempo.setForeground(new java.awt.Color(255, 0, 0));
@@ -148,33 +158,33 @@ public class Interfaz extends javax.swing.JFrame {
         panelPrincipalLayout.setHorizontalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(19, 19, 19)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
-                .addComponent(txtTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(172, 172, 172))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addComponent(btnEncender2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(giroIzq2, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
+                        .addComponent(giroIzq2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addComponent(btnEncender1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(giroIzq1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(giroIzq1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(giroDer2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(giroDer1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45))
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(giroDer1, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(giroDer2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,13 +230,24 @@ public class Interfaz extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void cImagen(JLabel label){
+    private void cImagen(JLabel label){
         ImageIcon icono = new ImageIcon("src/Imagenes/logo.png");
         label.setIcon(icono); 
     }
+    private boolean isNumeric(String valor){
+        for (int i = 0; i < valor.length(); i++) {
+            if (valor.charAt(i)==46 || valor.charAt(i)==45) {
+                
+            }else{
+                if (valor.charAt(i)<48 || valor.charAt(i)>57) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
     private void btnEncender1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncender1ActionPerformed
         try {
-            // TODO add your handling code here:
             arduino.sendData("1");
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
@@ -235,7 +256,6 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void btnEncender2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncender2ActionPerformed
         try {
-            // TODO add your handling code here:
             arduino.sendData("2");
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
@@ -244,8 +264,11 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void btnTiempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTiempoActionPerformed
         try {
-            if (Integer.parseInt(txtTiempo.getText())>0 && !txtTiempo.getText().equals("")) {
-                arduino.sendData(txtTiempo.getText());
+            if (!txtTiempo.getText().equals("") && isNumeric(txtTiempo.getText())) {
+                float valor=Float.parseFloat(txtTiempo.getText());
+                if (valor>0) {
+                    arduino.sendData(txtTiempo.getText());
+                }
             }
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
@@ -287,6 +310,22 @@ public class Interfaz extends javax.swing.JFrame {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_giroDer2ActionPerformed
+
+    private void txtTiempoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTiempoFocusGained
+        // TODO add your handling code here:
+        if (txtTiempo.getText().equals("Segundos")) {            
+            txtTiempo.setText("");
+        }
+        txtTiempo.setForeground(Color.blue);
+    }//GEN-LAST:event_txtTiempoFocusGained
+
+    private void txtTiempoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTiempoFocusLost
+        // TODO add your handling code here:
+        if (txtTiempo.getText().equals("")) {
+            txtTiempo.setText("Segundos");
+            txtTiempo.setForeground(Color.LIGHT_GRAY);
+        }
+    }//GEN-LAST:event_txtTiempoFocusLost
 
     /**
      * @param args the command line arguments
